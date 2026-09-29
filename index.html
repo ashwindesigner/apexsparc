@@ -530,9 +530,9 @@ $('#posts').innerHTML=posts.map(([t,d,dt,c,g],i)=>`<article class="post card"><d
 
 /* plans */
 const plans=[
- ['Focus','For one team with one big question.','£6k','Choose Focus',['One strategic question','Two-week discovery','Leadership workshop','Written recommendation','Email support'],0],
- ['Cycle','Our most requested engagement.','£18k','Choose Cycle',['Twelve-week engagement','Up to five teams','OKR and cadence design','Monthly board-ready report','Weekly partner check-in'],1],
- ['Partner','Ongoing support for the leadership team.','£32k','Choose Partner',['Rolling quarterly cycles','Unlimited teams','Pricing and market research','Offsite design and facilitation','Direct partner line'],0]
+ ['Focus','For one team with one big question.','₹25k','Choose Focus',['One strategic question','Two-week discovery','Leadership workshop','Written recommendation','Email support'],0],
+ ['Cycle','Our most requested engagement.','₹40k','Choose Cycle',['Twelve-week engagement','Up to five teams','OKR and cadence design','Monthly board-ready report','Weekly partner check-in'],1],
+ ['Partner','Ongoing support for the leadership team.','₹70k','Choose Partner',['Rolling quarterly cycles','Unlimited teams','Pricing and market research','Offsite design and facilitation','Direct partner line'],0]
 ];
 $('#plans').innerHTML=plans.map(([n,s,p,b,f,best])=>`<div class="plan${best?' best':''}">${best?'<span class="tag">Most chosen</span>':''}<h3>${n}</h3><p class="sub">${s}</p><div class="price">${p}<small> /quarter</small></div><a class="btn ${best?'btn-blue':'btn-dark'}" href="#contact">${b}</a><ul>${f.map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('');
 const fi=(p)=>`<svg viewBox="0 0 40 40" fill="none" stroke="var(--ink)" stroke-width="1.6">${p}</svg>`;
