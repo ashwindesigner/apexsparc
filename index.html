@@ -294,6 +294,10 @@ textarea{min-height:120px;resize:vertical}
 .contact-options legend{margin-bottom:2px;font-size:15px;font-weight:600}
 .contact-options .choice{display:flex;align-items:center;gap:10px;font-size:14px}
 .contact-options .choice input{width:18px;height:18px;margin:0;accent-color:var(--accent)}
+.call-pickers{display:grid;grid-template-columns:1.2fr 1fr;gap:12px}
+.contact-options select{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+.contact-options select:disabled{opacity:.55;cursor:not-allowed}
+@media (max-width:520px){.call-pickers{grid-template-columns:1fr}}
 .whatsapp-link{display:inline-flex;align-items:center;gap:8px;width:max-content;color:var(--accent);font-size:14px;font-weight:600}
 .whatsapp-link:hover{text-decoration:underline}
 .sent{color:var(--accent);font-weight:600}
@@ -445,9 +449,12 @@ textarea{min-height:120px;resize:vertical}
         <div class="two"><label for="f-name">Your name<input id="f-name" name="name" required placeholder="Alex Morgan"></label><label for="f-mail">Work email<input id="f-mail" name="email" type="email" required placeholder="alex@company.com"></label></div>
         <label for="f-phone">Phone number<input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+91 999 888 1234"></label>
         <fieldset class="contact-options">
-          <legend>Call preference</legend>
+          <legend>Preferred call time</legend>
+          <div class="call-pickers">
+            <label for="f-call-date">Date (next 7 days)<select id="f-call-date" name="preferred_call_date"><option value="">Choose a day (optional)</option></select></label>
+            <label for="f-call-time">Time<select id="f-call-time" name="preferred_call_time"><option value="">Choose a time (optional)</option></select></label>
+          </div>
           <label class="choice" for="f-call-anytime"><input id="f-call-anytime" name="call_anytime" type="checkbox">Call me anytime</label>
-          <label for="f-call-date">Preferred date and time (within the next 7 days)<input id="f-call-date" name="preferred_call_at" type="datetime-local" step="900"></label>
           <label class="choice" for="f-whatsapp"><input id="f-whatsapp" name="whatsapp_requested" type="checkbox">Contact me on WhatsApp</label>
           <a class="whatsapp-link" href="https://wa.me/919985058875?text=Hi%2C%20I%27d%20like%20to%20discuss%20my%20project%20with%20ApexSparc." target="_blank" rel="noopener noreferrer">Open WhatsApp chat <span aria-hidden="true">&#8599;</span></a>
         </fieldset>
@@ -644,16 +651,31 @@ const contactStatus=$('#contact-status');
 const supabaseConfig=window.APEXSPARC_SUPABASE||{};
 const callAnytime=$('#f-call-anytime');
 const callDate=$('#f-call-date');
-const localDateTimeValue=date=>new Date(date.getTime()-date.getTimezoneOffset()*60000).toISOString().slice(0,16);
-const updateCallDateRange=()=>{
-  const now=new Date();
-  callDate.min=localDateTimeValue(now);
-  callDate.max=localDateTimeValue(new Date(now.getTime()+7*24*60*60*1000));
+const callTime=$('#f-call-time');
+const localDateValue=date=>`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+const updateCallOptions=()=>{
+  callDate.replaceChildren(new Option('Choose a day (optional)',''));
+  callTime.replaceChildren(new Option('Choose a time (optional)',''));
+  const today=new Date();
+  today.setHours(0,0,0,0);
+  for(let dayOffset=0;dayOffset<7;dayOffset++){
+    const date=new Date(today);
+    date.setDate(today.getDate()+dayOffset);
+    const label=new Intl.DateTimeFormat(undefined,{weekday:'short',month:'short',day:'numeric'}).format(date);
+    callDate.add(new Option(dayOffset===0?`Today, ${label}`:label,localDateValue(date)));
+  }
+  for(let minutes=9*60;minutes<=17*60+30;minutes+=30){
+    const hours=Math.floor(minutes/60);
+    const minute=minutes%60;
+    const value=`${String(hours).padStart(2,'0')}:${String(minute).padStart(2,'0')}`;
+    const label=new Intl.DateTimeFormat(undefined,{hour:'numeric',minute:'2-digit'}).format(new Date(2000,0,1,hours,minute));
+    callTime.add(new Option(label,value));
+  }
 };
-updateCallDateRange();
+updateCallOptions();
 callAnytime.addEventListener('change',()=>{
-  callDate.disabled=callAnytime.checked;
-  if(callAnytime.checked)callDate.value='';
+  callDate.disabled=callTime.disabled=callAnytime.checked;
+  if(callAnytime.checked)callDate.value=callTime.value='';
 });
 contactForm.addEventListener('submit',async event=>{
   event.preventDefault();
@@ -668,13 +690,15 @@ contactForm.addEventListener('submit',async event=>{
   contactStatus.textContent='Sending your message...';
   const fields=new FormData(contactForm);
   const callAnytimeRequested=fields.get('call_anytime')==='on';
-  const preferredCallValue=fields.get('preferred_call_at');
+  const preferredCallDate=fields.get('preferred_call_date');
+  const preferredCallTime=fields.get('preferred_call_time');
+  const preferredCallValue=preferredCallDate&&preferredCallTime?new Date(`${preferredCallDate}T${preferredCallTime}`).toISOString():null;
   const requestData={
     name:fields.get('name'),
     email:fields.get('email'),
     phone:fields.get('phone')||null,
     message:fields.get('message'),
-    preferred_call_at:callAnytimeRequested||!preferredCallValue?null:new Date(preferredCallValue).toISOString(),
+    preferred_call_at:callAnytimeRequested?null:preferredCallValue,
     call_anytime:callAnytimeRequested,
     whatsapp_requested:fields.get('whatsapp_requested')==='on'
   };
@@ -687,8 +711,8 @@ contactForm.addEventListener('submit',async event=>{
     });
     if(!response.ok)throw new Error(`Request storage failed (${response.status})`);
     contactForm.reset();
-    callDate.disabled=false;
-    updateCallDateRange();
+    callDate.disabled=callTime.disabled=false;
+    updateCallOptions();
     contactStatus.textContent='Thank you. Your message has been received. Our team will reach out soon.';
     submitButton.disabled=false;
     fetch('https://formsubmit.co/ajax/ashwin.designer@gmail.com',{
