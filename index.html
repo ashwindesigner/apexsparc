@@ -430,7 +430,7 @@ textarea{min-height:120px;resize:vertical}
   <div class="wrap">
     <div class="c-card card">
       <div class="c-art"><i class="ring" style="width:420px;height:420px;right:-140px;top:-120px"></i><i class="ring" style="width:260px;height:260px;right:-60px;top:-40px"></i><b>We reply within one working day.</b><span>Most first calls last 30 minutes and end with a short written scope.</span></div>
-      <form id="form" action="https://formsubmit.co/ashwin.designer@gmail.com" method="POST">
+      <form id="form" method="post">
         <input type="hidden" name="_subject" value="New ApexSparc contact request">
         <input type="hidden" name="_template" value="table">
         <h3>Let's talk</h3><p style="color:var(--ink-soft)">Tell us what you're working on.</p>
@@ -628,25 +628,42 @@ const contactForm=$('#form');
 const contactStatus=$('#contact-status');
 const supabaseConfig=window.APEXSPARC_SUPABASE||{};
 contactForm.addEventListener('submit',async event=>{
-  if(!supabaseConfig.url||!supabaseConfig.publishableKey)return;
   event.preventDefault();
   const submitButton=contactForm.querySelector('[type="submit"]');
+  if(!supabaseConfig.url||!supabaseConfig.publishableKey){
+    contactStatus.hidden=false;
+    contactStatus.textContent='We can’t receive messages right now. Please try again later.';
+    return;
+  }
   submitButton.disabled=true;
   contactStatus.hidden=false;
-  contactStatus.textContent='Saving your request...';
+  contactStatus.textContent='Sending your message...';
   const fields=new FormData(contactForm);
   try{
     const response=await fetch(`${supabaseConfig.url.replace(/\/+$/,'')}/rest/v1/contact_requests`,{
       method:'POST',
       headers:{apikey:supabaseConfig.publishableKey,'Content-Type':'application/json',Prefer:'return=minimal'},
-      body:JSON.stringify({name:fields.get('name'),email:fields.get('email'),phone:fields.get('phone'),message:fields.get('message')})
+      body:JSON.stringify({name:fields.get('name'),email:fields.get('email'),phone:fields.get('phone')||null,message:fields.get('message')})
     });
     if(!response.ok)throw new Error(`Request storage failed (${response.status})`);
+    contactForm.reset();
+    contactStatus.textContent='Thank you. Your message has been received. Our team will reach out soon.';
+    submitButton.disabled=false;
+    fetch('https://formsubmit.co/ajax/ashwin.designer@gmail.com',{
+      method:'POST',
+      headers:{'Content-Type':'application/json',Accept:'application/json'},
+      body:JSON.stringify(Object.fromEntries(fields))
+    }).then(async emailResponse=>{
+      if(!emailResponse.ok)throw new Error(`Email notification failed (${emailResponse.status})`);
+      const result=await emailResponse.json();
+      if(result.success===false||result.success==='false')throw new Error('Email notification was rejected');
+    }).catch(()=>{
+      contactStatus.textContent='Thank you. Your request is saved in the admin inbox, but the email notification could not be sent.';
+    });
   }catch(error){
-    contactStatus.textContent='Dashboard storage is unavailable. Sending your request by email instead.';
+    contactStatus.textContent='We could not send your message right now. Please try again.';
     submitButton.disabled=false;
   }
-  HTMLFormElement.prototype.submit.call(contactForm);
 });
 $('#join').onclick=()=>{$('#join').textContent='Joined'};
 </script>
