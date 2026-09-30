@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Contact inbox | ApexSparc</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+  <style>.pagination{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:15px 2px;color:var(--soft);font-size:12px}.pagination>div{display:flex;gap:7px}.pagination .secondary-button:disabled{opacity:.45;cursor:default}</style>
+  <script src="supabase-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="admin.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <aside class="rail" aria-label="Admin navigation">
+      <a class="brand" href="index.html" aria-label="ApexSparc home">
+        <span class="brand-mark" aria-hidden="true">A</span>
+        <span>ApexSparc<small>ADMIN</small></span>
+      </a>
+      <nav class="rail-nav">
+        <a class="rail-link active" href="#inbox" aria-current="page"><span class="nav-icon" aria-hidden="true">&#9638;</span> Contact inbox</a>
+        <a class="rail-link" href="index.html#contact"><span class="nav-icon" aria-hidden="true">&#8599;</span> View contact page</a>
+      </nav>
+      <div class="rail-bottom">
+        <span class="connection-dot" id="connection-dot"></span>
+        <span id="connection-label">Checking connection</span>
+      </div>
+    </aside>
+
+    <section class="workspace">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">CLIENT PIPELINE</p>
+          <h1>Contact inbox</h1>
+        </div>
+        <div class="top-actions">
+          <button class="icon-button" id="refresh-button" type="button" aria-label="Refresh requests" title="Refresh requests"><span aria-hidden="true">&#8635;</span></button>
+          <button class="icon-button" id="settings-button" type="button" aria-label="Open settings" title="Settings"><span aria-hidden="true">&#9881;</span></button>
+          <button class="text-button" id="sign-out-button" type="button" hidden>Sign out</button>
+        </div>
+      </header>
+
+      <section class="setup-notice" id="setup-notice" hidden>
+        <div class="notice-mark" aria-hidden="true">!</div>
+        <div><h2>Connect your request inbox</h2><p>Add your Supabase project URL and public publishable key to <code>supabase-config.js</code>, then apply the database setup SQL.</p><a class="inline-link" href="SUPABASE_SETUP.md">Open setup instructions <span aria-hidden="true">&#8599;</span></a></div>
+      </section>
+
+      <section class="auth-panel" id="auth-panel" hidden>
+        <div class="auth-copy"><span class="eyebrow">PRIVATE WORKSPACE</span><h2>Sign in to your inbox.</h2><p>Use the administrator account configured in Supabase.</p></div>
+        <form id="login-form" class="login-form">
+          <label>Email address<input id="login-email" type="email" autocomplete="username" required></label>
+          <label>Password<input id="login-password" type="password" autocomplete="current-password" required></label>
+          <button class="primary-button" type="submit">Sign in <span aria-hidden="true">&#8594;</span></button>
+          <p class="form-feedback" id="login-feedback" role="status" hidden></p>
+        </form>
+      </section>
+
+      <section class="inbox" id="inbox" hidden>
+        <div class="summary-row" aria-label="Request totals">
+          <div class="summary-item"><span class="summary-label">TOTAL REQUESTS</span><strong id="total-count">0</strong></div>
+          <div class="summary-item"><span class="summary-label">NEW</span><strong id="new-count">0</strong></div>
+          <div class="summary-item"><span class="summary-label">IN PROGRESS</span><strong id="progress-count">0</strong></div>
+          <div class="summary-item"><span class="summary-label">CLOSED</span><strong id="closed-count">0</strong></div>
+        </div>
+
+        <div class="inbox-toolbar">
+          <div class="filters" role="group" aria-label="Filter by status">
+            <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">All <span id="filter-all-count">0</span></button>
+            <button class="filter-button" type="button" data-filter="new" aria-pressed="false">New <span id="filter-new-count">0</span></button>
+            <button class="filter-button" type="button" data-filter="in_progress" aria-pressed="false">In progress</button>
+            <button class="filter-button" type="button" data-filter="closed" aria-pressed="false">Closed</button>
+          </div>
+          <div class="toolbar-actions">
+            <label class="search-box"><span aria-hidden="true">&#9906;</span><input id="search-input" type="search" placeholder="Search requests" aria-label="Search requests"></label>
+            <button class="secondary-button" id="export-button" type="button"><span aria-hidden="true">&#8595;</span> Export CSV</button>
+          </div>
+        </div>
+
+        <div class="request-list" id="request-list" aria-live="polite"></div>
+        <div class="pagination" id="pagination" hidden><span id="page-summary">1 of 1</span><div><button class="secondary-button" id="previous-page" type="button">Previous</button><button class="secondary-button" id="next-page" type="button">Next</button></div></div>
+        <p class="page-feedback" id="page-feedback" role="status" hidden></p>
+      </section>
+      <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    </section>
+  </main>
+
+  <dialog class="settings-dialog" id="settings-dialog" aria-labelledby="settings-title">
+    <form method="dialog" class="dialog-heading"><div><p class="eyebrow">PREFERENCES</p><h2 id="settings-title">Inbox settings</h2></div><button class="icon-button" aria-label="Close settings" value="close">&#10005;</button></form>
+    <div class="setting-row"><div><strong>Color theme</strong><p>Choose the dashboard appearance.</p></div><select id="theme-setting" aria-label="Color theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></div>
+    <div class="setting-row"><div><strong>Rows per page</strong><p>How many requests to show at once.</p></div><select id="page-size-setting" aria-label="Rows per page"><option value="10">10</option><option value="25">25</option><option value="50">50</option></select></div>
+    <div class="setting-row"><div><strong>New request alerts</strong><p>Show desktop notifications while this inbox is open.</p></div><label class="switch"><input id="notifications-setting" type="checkbox"><span aria-hidden="true"></span></label></div>
+    <p class="settings-note">Preferences are saved in this browser.</p>
+  </dialog>
+</body>
+</html>
