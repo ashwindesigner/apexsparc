@@ -1,10 +1,12 @@
 # Contact inbox setup
 
-The contact form keeps its email delivery through FormSubmit and also writes submissions to Supabase for the private admin inbox. The browser app uses the Supabase project URL and publishable key. Never put a secret or service-role key in this project.
+The contact form keeps its email delivery through FormSubmit and also writes submissions to Supabase for the private admin inbox. It stores the preferred call date/time, an anytime-call preference, and a WhatsApp contact preference along with the request. The browser app uses the Supabase project URL and publishable key. Never put a secret or service-role key in this project.
 
 ## 1. Create the database table
 
 In the Supabase project SQL Editor, run the contents of `supabase-schema.sql`. Row-level security allows visitors to submit requests but only an authenticated user whose **app metadata** role is `admin` can read, update, or delete them.
+
+If `contact_requests` already exists, run the updated script again; its `add column if not exists` statements add the scheduling and WhatsApp fields without replacing existing requests.
 
 For realtime new-request alerts, open Database > Publications, edit `supabase_realtime`, and enable `public.contact_requests`.
 
@@ -45,4 +47,4 @@ Open `http://localhost:8000/admin.html`, sign in with the admin account, and sub
 
 ## Inbox tools
 
-The dashboard includes search, status filters, status updates, delete, CSV export, and realtime new-request alerts. Theme, page size, and desktop notification preferences are saved in the current browser only.
+The dashboard includes search, status filters, status updates, delete, CSV export, and realtime new-request alerts. It shows and exports call and WhatsApp preferences. Theme, page size, and desktop notification preferences are saved in the current browser only.

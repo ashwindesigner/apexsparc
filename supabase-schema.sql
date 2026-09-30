@@ -5,10 +5,18 @@ create table if not exists public.contact_requests (
   name text not null check (char_length(trim(name)) between 1 and 160),
   email text not null check (char_length(email) between 3 and 320),
   phone text check (phone is null or char_length(phone) <= 60),
+  preferred_call_at timestamptz,
+  call_anytime boolean not null default false,
+  whatsapp_requested boolean not null default false,
   message text not null default '' check (char_length(message) <= 5000),
   status text not null default 'new' check (status in ('new', 'in_progress', 'closed')),
   created_at timestamptz not null default now()
 );
+
+alter table public.contact_requests
+  add column if not exists preferred_call_at timestamptz,
+  add column if not exists call_anytime boolean not null default false,
+  add column if not exists whatsapp_requested boolean not null default false;
 
 alter table public.contact_requests enable row level security;
 

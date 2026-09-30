@@ -170,6 +170,22 @@ function renderRequest(request) {
     phone.className = 'secondary';
     contact.append(phone);
   }
+  if (request.call_anytime) {
+    contact.append(makeCell('secondary', 'Call me anytime'));
+  } else if (request.preferred_call_at) {
+    contact.append(makeCell('secondary', `Preferred: ${new Date(request.preferred_call_at).toLocaleString()}`));
+  }
+  if (request.whatsapp_requested) {
+    contact.append(makeCell('secondary', 'WhatsApp requested'));
+  }
+  if (request.whatsapp_requested && request.phone) {
+    const whatsapp = document.createElement('a');
+    whatsapp.textContent = 'Open WhatsApp';
+    whatsapp.href = `https://wa.me/${request.phone.replace(/\D/g, '')}`;
+    whatsapp.target = '_blank';
+    whatsapp.rel = 'noopener noreferrer';
+    contact.append(whatsapp);
+  }
 
   const status = document.createElement('select');
   status.className = 'status-select';
@@ -217,7 +233,7 @@ function renderRequest(request) {
 function filteredRequests() {
   return requests.filter(request => {
     const matchesFilter = filter === 'all' || request.status === filter;
-    const searchable = `${request.name || ''} ${request.email || ''} ${request.phone || ''} ${request.message || ''}`.toLowerCase();
+    const searchable = `${request.name || ''} ${request.email || ''} ${request.phone || ''} ${request.message || ''} ${request.preferred_call_at || ''} ${request.call_anytime ? 'call anytime' : ''} ${request.whatsapp_requested ? 'whatsapp' : ''}`.toLowerCase();
     return matchesFilter && searchable.includes(query);
   });
 }
@@ -294,7 +310,7 @@ function exportRequests() {
     showToast('There are no requests to export.');
     return;
   }
-  const columns = ['name', 'email', 'phone', 'message', 'status', 'created_at'];
+  const columns = ['name', 'email', 'phone', 'preferred_call_at', 'call_anytime', 'whatsapp_requested', 'message', 'status', 'created_at'];
   const csv = [columns.join(','), ...rows.map(request => columns.map(column => {
     const value = String(request[column] ?? '').replaceAll('"', '""');
     return `"${value}"`;
