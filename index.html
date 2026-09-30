@@ -52,6 +52,8 @@ section{padding-block:110px}
 .nav .logo img{width:220px;transition:width .35s cubic-bezier(.22,1,.36,1)}
 .nav.is-scrolled .logo{font-size:22px;gap:8px}
 .nav.is-scrolled .logo img{width:200px}
+:root[data-theme="dark"] .nav .logo img{filter:brightness(0) invert(1)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .nav .logo img{filter:brightness(0) invert(1)}}
 .nav ul{display:flex;gap:32px;list-style:none;margin:0;padding:0;font-weight:500;font-size:16px;transition:gap .35s cubic-bezier(.22,1,.36,1),font-size .35s cubic-bezier(.22,1,.36,1)}
 .nav ul a{color:var(--ink-soft);transition:color .2s} .nav ul a:hover{color:var(--ink)}
 .nav.is-scrolled ul{gap:26px;font-size:15px}
