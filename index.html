@@ -32,6 +32,8 @@ section{padding-block:110px}
 .eyebrow{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);text-align:center}
 .head{display:grid;gap:14px;justify-items:center;text-align:center;margin-bottom:56px}
 .head h2{font-size:clamp(32px,4.4vw,52px);max-width:720px}
+.section-subhead{font-size:24px;font-weight:600}
+.section-intro{max-width:720px;color:var(--ink-soft);font-size:17px}
 .btn{display:inline-flex;align-items:center;gap:10px;font:600 15px var(--display);padding:13px 20px;border-radius:12px;border:0;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}
 .btn:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .btn-dark{background:var(--dark);color:var(--dark-fg);box-shadow:0 8px 20px rgba(19,43,64,.25)}
@@ -126,7 +128,11 @@ section{padding-block:110px}
 .svc p{color:var(--ink-soft)}
 .link{font-weight:600;margin-top:auto;padding-top:6px}
 .link:hover{color:var(--accent)}
-.dots{display:flex;justify-content:center;gap:8px;margin:8px 0 40px}
+.svc-controls{display:flex;align-items:center;justify-content:center;gap:18px;margin:8px 0 40px}
+.svc-arrow{display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--ink);cursor:pointer;transition:color .2s,border-color .2s,transform .2s}
+.svc-arrow:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-1px)}
+.svc-arrow svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dots{display:flex;justify-content:center;gap:8px;margin:0}
 .dots button{width:9px;height:9px;border-radius:50%;border:0;padding:0;background:var(--line);cursor:pointer}
 .dots button.on{background:var(--ink-soft)}
 .center{text-align:center;display:grid;gap:22px;justify-items:center;color:var(--ink-soft);font-size:18px}
@@ -185,6 +191,8 @@ section{padding-block:110px}
 .showcase-check{width:22px;height:22px;grid-row:span 2;color:var(--accent)}
 .showcase-point h4{font-size:17px;font-weight:600}
 .showcase-point p{font-size:15px;color:var(--ink-soft)}
+.showcase-points-label{margin:0 0 -6px;color:var(--ink-soft);font-size:13px;font-weight:700;text-transform:uppercase}
+.showcase-cta{align-self:flex-start;margin-top:30px}
 .feature-mobile-image{display:none}
 @media (max-width:1100px){.showcase-grid{gap:56px}.showcase-card{padding:36px}}
 @media (max-width:1023px){
@@ -232,11 +240,21 @@ section{padding-block:110px}
 .diff-art canvas{width:100%;height:100%;display:block}
 .panel h3{font-size:clamp(28px,3vw,38px);margin-bottom:18px}
 .panel p{color:var(--ink-soft);margin-bottom:16px;max-width:52ch}
+.panel .panel-eyebrow{margin:26px 0 12px;color:var(--soft);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.panel-benefits{display:grid;gap:18px;margin-bottom:24px}
+.panel-benefit{display:grid;grid-template-columns:20px 1fr;gap:11px;align-items:start}
+.panel-benefit svg{width:20px;height:20px;margin-top:1px;color:var(--accent)}
+.panel-benefit h4{font-size:16px;font-weight:700}
+.panel-benefit p{margin:4px 0 0;font-size:14px}
 
 /* tools */
-.tools{display:flex;flex-wrap:wrap;justify-content:center;gap:28px;max-width:1010px;margin:0 auto}
-.tool{flex:0 1 228px;height:94px;display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:22px}
-.tool svg{width:28px;height:28px}
+.tools{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;max-width:1040px;margin:0 auto}
+.tool{flex:0 1 240px;min-width:220px;min-height:118px;height:auto;display:flex;align-items:center;justify-content:flex-start;gap:14px;padding:18px;font-weight:400;font-size:15px;text-align:left}
+.tool-mark{display:grid;place-items:center;flex:none;width:42px;height:42px;border-radius:10px;background:var(--bg-2);color:var(--tool-color);font:700 14px var(--display)}
+.tool-copy{display:grid;gap:5px;min-width:0}
+.tool-copy b{font:700 15px/1.25 var(--display);overflow-wrap:anywhere}
+.tool-copy small{color:var(--ink-soft);font-size:12px;line-height:1.4}
+@media (max-width:600px){.tool{flex-basis:100%}}
 
 /* blog */
 .blog-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:48px}
@@ -344,8 +362,8 @@ textarea{min-height:120px;resize:vertical}
   <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="wrap">
     <span class="pill"><b></b>Strategy studio for growing teams</span>
-    <h1>Give your brand the attention it <span class="circled"><em class="s">deserves.</em><svg viewBox="0 0 200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M20 44C18 18 90 6 150 12s48 34 20 50-120 18-148 0C8 50 30 26 70 20"/></svg></span></h1>
-    <p class="lede">ApexSparc helps leadership teams pick the few bets that matter, turn them into quarterly plans, and keep every team pulling the same way until the numbers move.</p>
+    <h1>We put your brand in the <span class="circled"><em class="s">spotlight.</em><svg viewBox="0 0 200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M20 44C18 18 90 6 150 12s48 34 20 50-120 18-148 0C8 50 30 26 70 20"/></svg></span></h1>
+    <p class="lede">From strategy and branding to performance marketing and digital experiences, we help businesses get noticed, connect with the right audience, and grow.</p>
     <a class="btn btn-dark" href="#services">See how we work <span class="arr">↗</span></a>
 
     <div class="hero-visual" aria-label="Product demonstration video">
@@ -358,30 +376,34 @@ textarea{min-height:120px;resize:vertical}
   </div>
 </header>
 
-<div class="trust">
+<div class="trust" style="display: none;">
   <p>Teams we've worked with across fintech, retail and health</p>
   <div class="marquee"><div class="row" id="brands"></div></div>
 </div>
 
 <section id="services">
   <div class="wrap">
-    <div class="head"><span class="eyebrow">What we do</span><h2>Six ways we help you move <em class="s">faster</em> with less noise.</h2></div>
+    <div class="head"><span class="eyebrow">What we do</span><h2>Six ways we help your brand get <em class="s">noticed</em> and grow.</h2></div>
     <div class="svc-track" id="svc"></div>
-    <div class="dots" id="dots"></div>
+    <div class="svc-controls" aria-label="Service carousel controls">
+      <button class="svc-arrow" id="svc-prev" type="button" aria-label="Previous services" title="Previous services"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+      <div class="dots" id="dots" role="group" aria-label="Go to service slide"></div>
+      <button class="svc-arrow" id="svc-next" type="button" aria-label="Next services" title="Next services"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+    </div>
     <div class="center"><p>Not sure where to start? We'll scope it with you in one call.</p><a class="btn btn-blue" href="#contact">Talk it through <span class="arr">↗</span></a></div>
   </div>
 </section>
 
 <section id="why" style="padding-top:40px">
   <div class="wrap">
-    <div class="head"><span class="eyebrow">WHY CHOOSE US?</span><h2>What changes after <em class="s">twelve</em> weeks with us.</h2></div>
+    <div class="head"><span class="eyebrow">HOW WE DO THINGS DIFFERENTLY</span><h2>More than marketing.</h2><h3 class="section-subhead">We build brands that <em class="s">grow.</em></h3><p class="section-intro">We bring strategy, creative, technology, and performance marketing together to help businesses build a stronger digital presence and turn attention into meaningful growth.</p></div>
     <div class="showcase-grid">
       <div class="showcase-visual">
         <div class="showcase-sticky">
           <div class="showcase-card">
-            <span class="showcase-kicker">The ApexSparc difference</span>
+            <span class="showcase-kicker" id="showcase-kicker">01 — STRATEGY BEFORE SPENDING</span>
             <div class="showcase-art" id="showcase-art" aria-label="Feature illustration"></div>
-            <div class="showcase-caption"><span id="showcase-caption">Evidence-led priorities</span><span class="showcase-count" id="showcase-count">01 / 03</span></div>
+            <div class="showcase-caption"><span id="showcase-caption">Strategy that puts every marketing dollar to work.</span><span class="showcase-count" id="showcase-count">01 / 04</span></div>
           </div>
         </div>
       </div>
@@ -407,7 +429,7 @@ textarea{min-height:120px;resize:vertical}
 
 <section>
   <div class="wrap">
-    <div class="head"><span class="eyebrow">How we're different</span><h2>Senior people, short cycles, and work that <em class="s">sticks</em>.</h2></div>
+    <div class="head"><span class="eyebrow">HOW WE'RE DIFFERENT</span><h2>Big ideas, smart execution, and marketing that <em class="s">makes a difference.</em></h2></div>
     <div class="diff">
       <div class="tabs" role="tablist" id="tabs"></div>
       <div class="diff-art"><canvas id="art" aria-hidden="true"></canvas></div>
@@ -418,7 +440,7 @@ textarea{min-height:120px;resize:vertical}
 
 <section style="padding-top:20px">
   <div class="wrap">
-    <p class="center" style="margin-bottom:40px">We plug into the tools your teams already use.</p>
+    <div class="head"><span class="eyebrow">THE TOOLS BEHIND THE WORK</span><h2>The right platforms.</h2><h3 class="section-subhead">The right audience. The right results.</h3><p class="section-intro">We use proven digital platforms and creative tools to build, launch, measure, and continuously improve your marketing.</p></div>
     <div class="tools" id="tools"></div>
   </div>
 </section>
@@ -527,22 +549,62 @@ const art=(k)=>{const s={
  team:'<circle cx="32" cy="36" r="10" fill="var(--accent)"/><circle cx="64" cy="36" r="10" fill="none" stroke="var(--ink)" stroke-width="2.4"/><path d="M14 74c2-14 34-14 36 0M46 74c2-14 34-14 36 0" fill="none" stroke="var(--ink)" stroke-width="2.4"/>'
 }[k];return `<svg viewBox="0 0 96 96" aria-hidden="true">${s}</svg>`};
 const svcs=[
- ['plan','Strategic planning','A three-year direction and a one-quarter plan that actually connect.'],
- ['research','Market & customer research','Interviews, win-loss analysis and sizing that answer the question you are stuck on.'],
- ['okr','Goals & OKR design','Objectives teams can remember and key results they can move each week.'],
- ['ops','Operating rhythm','Meeting cadences, reviews and dashboards that keep plans honest.'],
- ['price','Pricing & packaging','Tiers, discounts and positioning tested against how buyers really decide.'],
- ['team','Leadership offsites','Two days that end with decisions, owners and dates, not sticky notes.']
+ ['plan','Brand Strategy & Identity','Build a brand that looks professional, feels consistent, and gives people a reason to remember you.'],
+ ['research','Creative & Content',"Create scroll-stopping designs, social content, videos, campaigns, and visuals that get your audience's attention."],
+ ['okr','Social Media Marketing','Build your presence, engage your audience, and turn social media into a consistent channel for your business.'],
+ ['ops','Google & Meta Ads','Reach the right people at the right time with targeted campaigns designed to drive traffic, leads, and conversions.'],
+ ['price','Websites & Digital Experiences','Turn visitors into customers with modern websites, landing pages, and digital experiences built around your goals.'],
+ ['team','Influencer & Local Marketing','Connect your business with relevant creators and local audiences to build awareness, trust, and new opportunities.']
 ];
 $('#svc').innerHTML=svcs.map(([k,t,d])=>`<article class="svc card">${art(k)}<h3>${t}</h3><p>${d}</p><a class="link" href="#contact">Learn more →</a></article>`).join('');
 const track=$('#svc'),cards=[...track.children];
-$('#dots').innerHTML=cards.map((_,i)=>`<button aria-label="Go to service ${i+1}"></button>`).join('');
-const dots=[...$('#dots').children];
-dots.forEach((d,i)=>d.onclick=()=>track.scrollTo({left:cards[i].offsetLeft-track.offsetLeft,behavior:'smooth'}));
-const syncDots=()=>{const i=Math.round(track.scrollLeft/(cards[0].offsetWidth+28));dots.forEach((d,j)=>d.classList.toggle('on',j===Math.min(i,cards.length-1)))};
-track.addEventListener('scroll',syncDots,{passive:true});syncDots();
-let auto=setInterval(()=>{const max=track.scrollWidth-track.clientWidth;track.scrollTo({left:track.scrollLeft>=max-4?0:track.scrollLeft+cards[0].offsetWidth+28,behavior:'smooth'})},4000);
-track.addEventListener('pointerenter',()=>clearInterval(auto));
+const dotsTrack=$('#dots');
+const getSlidePositions=()=>{
+  const max=Math.max(0,track.scrollWidth-track.clientWidth);
+  if(max<1||cards.length<2)return [0];
+  const step=cards[1].offsetLeft-cards[0].offsetLeft;
+  const positions=[0];
+  while(positions[positions.length-1]+step<max-4)positions.push(positions[positions.length-1]+step);
+  if(max-positions[positions.length-1]>4)positions.push(max);
+  return positions;
+};
+let dots=[];
+const currentSlideIndex=positions=>positions.reduce((closest,position,index)=>Math.abs(position-track.scrollLeft)<Math.abs(positions[closest]-track.scrollLeft)?index:closest,0);
+const syncDots=()=>{
+  const positions=getSlidePositions();
+  const active=currentSlideIndex(positions);
+  dots.forEach((dot,index)=>{
+    dot.classList.toggle('on',index===active);
+    dot.setAttribute('aria-current',String(index===active));
+  });
+};
+const renderDots=()=>{
+  const positions=getSlidePositions();
+  dotsTrack.innerHTML=positions.map((_,index)=>`<button type="button" aria-label="Go to service slide ${index+1}" aria-current="false"></button>`).join('');
+  dots=[...dotsTrack.children];
+  dots.forEach((dot,index)=>dot.addEventListener('click',()=>track.scrollTo({left:getSlidePositions()[index],behavior:'smooth'})));
+  syncDots();
+};
+const moveSlide=direction=>{
+  const positions=getSlidePositions();
+  const next=(currentSlideIndex(positions)+direction+positions.length)%positions.length;
+  track.scrollTo({left:positions[next],behavior:'smooth'});
+};
+$('#svc-prev').addEventListener('click',()=>moveSlide(-1));
+$('#svc-next').addEventListener('click',()=>moveSlide(1));
+track.addEventListener('scroll',syncDots,{passive:true});
+renderDots();
+let auto;
+const stopAuto=()=>clearInterval(auto);
+const startAuto=()=>{stopAuto();auto=setInterval(()=>moveSlide(1),4000)};
+for(const control of [track,$('.svc-controls')]){
+  control.addEventListener('pointerenter',stopAuto);
+  control.addEventListener('pointerleave',startAuto);
+  control.addEventListener('focusin',stopAuto);
+  control.addEventListener('focusout',event=>{if(!control.contains(event.relatedTarget))startAuto()});
+}
+window.addEventListener('resize',renderDots,{passive:true});
+startAuto();
 
 /* quotes */
 const qs=[
@@ -557,32 +619,82 @@ const qh=qs.map(([t,n,r,c])=>`<figure class="q card" style="margin:0"><blockquot
 $('#quotes').innerHTML=qh+qh;
 
 /* tabs */
-const tabIcon=(p)=>`<svg viewBox="0 0 26 26" fill="none" stroke="var(--ink)" stroke-width="1.8">${p}<circle cx="13" cy="10" r="3" fill="var(--accent)" stroke="none"/></svg>`;
+const tabIcon=iconMarkup=>`<svg viewBox="0 0 26 26" fill="none" stroke="var(--ink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${iconMarkup}</svg>`;
 const tabs=[
- ['Senior team only','The partners who scope the work do the work.','<path d="M5 22c1-6 15-6 16 0"/>','Senior team only','Every engagement is led by a partner with at least fifteen years in operating roles. There are no hand-offs to junior staff after the pitch.','You get the same two or three people from kickoff to final review, and they know your business by week two.'],
- ['Twelve-week cycles','Short enough to stay focused, long enough to show results.','<rect x="4" y="6" width="18" height="16" rx="3"/>','Twelve-week cycles','We work in fixed twelve-week blocks with a clear goal for each. At the end you decide whether to continue, change direction or stop.','Short cycles keep the work tied to results and make it easy to say no to anything that is not paying off.'],
- ['Built to hand over','Your team runs it after we leave.','<path d="M4 16h8l3-4 7 0"/>','Built to hand over','We document every ritual, template and dashboard as we build it, and coach an internal owner to run each one.','By the final month your team is running the cadence and we are only reviewing it.'],
- ['Straight answers','We say what the data says, even when it stings.','<path d="M6 20l14-14"/>','Straight answers','If a bet is underperforming, you will hear it in the next weekly note along with what we would do about it.','Clients tell us this is the part they value most, and the part other advisors avoid.']
+ {title:'One team, everything you need',summary:'Strategy, creative, and technology under one roof.',icon:'<circle cx="8" cy="8" r="2.5"/><circle cx="18" cy="8" r="2.5"/><path d="M3 21c.4-4 2.3-6 5-6s4.6 2 5 6m-1.5-5.5c1-.9 2-1.3 3.5-1.3 2.9 0 4.8 2.2 5 5.8"/>',description:'Instead of working with different agencies for branding, advertising, design, and technology, you get one team that brings it all together.',benefits:[{title:'One team, everything you need',text:'From your logo and brand identity to social media, paid advertising, websites, apps, and digital campaigns, our team works together to create one consistent brand experience.'}],cta:'Meet our approach'},
+ {title:'Ideas backed by strategy',summary:'Creative thinking with a clear purpose.',icon:'<path d="M9 18h8m-7 4h6m-5-8a6 6 0 1 1 5 0c-.8.6-1.2 1.2-1.2 2h-3.6c0-.8-.4-1.4-1.2-2ZM13 2v2m9 7h-2M6 11H4m15.4-6.4L18 6m-10 0L6.6 4.6"/>',description:'Creative is powerful when it has a purpose. We combine creative thinking with audience insights, market research, and data to make sure every idea has a reason behind it.',benefits:[{title:'Ideas made for your audience',text:"We don't create content just to fill your social calendar. Every campaign, creative, and message is designed around your audience, your brand, and your business goals."}],cta:'See our strategy'},
+ {title:'Built for digital, ready for everywhere',summary:'One brand. Every touchpoint.',icon:'<rect x="3" y="4" width="8" height="8" rx="1.5"/><rect x="15" y="4" width="8" height="8" rx="1.5"/><rect x="3" y="16" width="8" height="7" rx="1.5"/><rect x="15" y="16" width="8" height="7" rx="1.5"/><path d="M11 8h4m-8 4v4m12-4v4m-8 3h4"/>',description:"Your customers don't interact with your brand in just one place. We create connected experiences across social media, search, websites, apps, print, and more.",benefits:[{title:'A consistent brand everywhere',text:'From a Google ad to an Instagram post, from your website to a printed brochure, we make sure your brand looks and feels consistent wherever your customers find you.'}],cta:'Explore our work'},
+ {title:'Focused on growth, not just activity',summary:'Less noise. More meaningful results.',icon:'<path d="M4 21V5m0 16h19M8 16l4-4 3 2 7-8"/><circle cx="22" cy="6" r="1.5" fill="var(--accent)" stroke="none"/>',description:"Posting more doesn't always mean growing more. We focus on the work that can actually move your business forward.",benefits:[{title:'Measure what matters',text:'We measure reach, engagement, leads, conversions, and customer growth, then use those insights to continuously improve your marketing.'}],cta:'Talk to our team'}
 ];
 const tl=$('#tabs'),panel=$('#panel');
-tl.innerHTML=tabs.map((t,i)=>`<button class="tab" role="tab" id="tab${i}" aria-selected="${i===0}"><h4>${tabIcon(t[2])}${t[0]}</h4><p>${t[1]}</p></button>`).join('');
-const show=i=>{[...tl.children].forEach((b,j)=>b.setAttribute('aria-selected',j===i));const t=tabs[i];panel.innerHTML=`<h3>${t[3]}</h3><p>${t[4]}</p><p>${t[5]}</p><a class="btn btn-dark" href="#contact" style="margin-top:10px">Discuss your project</a>`;hue=i};
+tl.innerHTML=tabs.map((tab,index)=>`<button class="tab" role="tab" id="tab${index}" aria-selected="${index===0}" aria-controls="panel"><h4>${tabIcon(tab.icon)}${tab.title}</h4><p>${tab.summary}</p></button>`).join('');
+const show=i=>{
+  [...tl.children].forEach((button,index)=>button.setAttribute('aria-selected',String(index===i)));
+  const tab=tabs[i];
+  panel.innerHTML=`<h3>${tab.title}</h3><p>${tab.description}</p><p class="panel-eyebrow">What you get</p><div class="panel-benefits">${tab.benefits.map(benefit=>`<div class="panel-benefit"><svg viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="9" stroke="currentColor" stroke-width="1.7"/><path d="m7 11 2.6 2.6L15.5 8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><div><h4>${benefit.title}</h4><p>${benefit.text}</p></div></div>`).join('')}</div><a class="btn btn-dark" href="#contact">${tab.cta}</a>`;
+  hue=i;
+  draw();
+};
 [...tl.children].forEach((b,i)=>b.onclick=()=>show(i));
 
 /* generative art for the middle column */
 let hue=0;const cv=$('#art'),cx=cv.getContext('2d');
-const palettes=[['#4aa8f0','#15314a','#f6b89a'],['#7cc3f7','#1f4a6c','#f3d1a6'],['#5db4f5','#132b40','#c6c1f2'],['#3d8fd0','#15314a','#f6b89a']];
-function draw(t){const r=cv.getBoundingClientRect(),d=devicePixelRatio||1;if(cv.width!==r.width*d){cv.width=r.width*d;cv.height=r.height*d}
- const w=cv.width,h=cv.height,p=palettes[hue];cx.clearRect(0,0,w,h);
- for(let i=0;i<9;i++){const y=h*(.15+i*.09);cx.beginPath();for(let x=0;x<=w;x+=8){const yy=y+Math.sin(x/w*6+t/1400+i*.7)*h*.04;x?cx.lineTo(x,yy):cx.moveTo(x,yy)}cx.strokeStyle=i%3===0?p[0]:p[1];cx.globalAlpha=.25+i*.07;cx.lineWidth=d*(1+i*.4);cx.stroke()}
- cx.globalAlpha=1;cx.fillStyle=p[2];cx.beginPath();cx.arc(w*.7,h*.22,w*.12,0,7);cx.fill();
- cx.fillStyle=p[1];cx.fillRect(w*.12,h*.74,w*.76,h*.14);cx.fillStyle=p[0];cx.fillRect(w*.12,h*.74,w*.76*(.4+hue*.15),h*.14);
- if(!matchMedia('(prefers-reduced-motion: reduce)').matches)requestAnimationFrame(draw)}
-show(0);requestAnimationFrame(draw);
+const palettes=[['#e5f3ec','#147b67','#f0a36b'],['#f5eee8','#17352f','#f0a36b'],['#edf0fa','#4d5aab','#e78a65'],['#edf3ef','#147b67','#f0a36b']];
+function draw(){
+ const rect=cv.getBoundingClientRect(),ratio=devicePixelRatio||1;
+ if(cv.width!==rect.width*ratio||cv.height!==rect.height*ratio){cv.width=rect.width*ratio;cv.height=rect.height*ratio}
+ cx.setTransform(cv.width/640,0,0,cv.height/500,0,0);
+ const [soft,accent,warm]=palettes[hue],ink='#17352f',muted='#6c7d77';
+ const card=(x,y,width,height,color,radius=16)=>{cx.fillStyle=color;cx.beginPath();cx.roundRect(x,y,width,height,radius);cx.fill()};
+ const text=(value,x,y,size,color=ink,weight=600)=>{cx.fillStyle=color;cx.font=`${weight} ${size}px Manrope, sans-serif`;cx.fillText(value,x,y)};
+ cx.clearRect(0,0,640,500);cx.fillStyle=soft;cx.fillRect(0,0,640,500);card(30,28,580,444,'#fff',22);
+ if(hue===0){
+  text('ONE TEAM. ONE BRAND.',64,74,14,muted,700);
+  card(205,110,230,92,ink,16);text('CONNECTED BRAND',233,145,12,'#a9c7bc',700);text('One shared direction',231,177,19,'#fff',700);
+  const nodes=[{x:62,label:'STRATEGY',color:accent},{x:235,label:'CREATIVE',color:warm},{x:408,label:'TECHNOLOGY',color:'#6278c8'}];
+  nodes.forEach(node=>{card(node.x,286,152,86,'#f4f7f5',13);card(node.x+14,304,28,28,node.color,8);text(node.label,node.x+14,353,11,ink,700)});
+  cx.strokeStyle='#bccdc4';cx.lineWidth=3;cx.beginPath();cx.moveTo(138,286);cx.lineTo(250,226);cx.moveTo(311,286);cx.lineTo(320,226);cx.moveTo(484,286);cx.lineTo(390,226);cx.stroke();
+  nodes.forEach(node=>{cx.fillStyle=node.color;cx.beginPath();cx.arc(node.x+28,318,5,0,Math.PI*2);cx.fill()});
+ }else if(hue===1){
+  text('IDEAS WITH INTENT',64,74,14,muted,700);
+  card(68,111,212,292,'#f6f8f6',16);text('AUDIENCE INSIGHT',91,151,12,muted,700);
+  cx.fillStyle='#d7ece3';cx.beginPath();cx.arc(174,224,55,0,Math.PI*2);cx.fill();
+  cx.fillStyle=accent;cx.beginPath();cx.arc(174,207,17,0,Math.PI*2);cx.fill();cx.beginPath();cx.ellipse(174,255,35,24,0,Math.PI,0);cx.fill();
+  text('What they need',99,322,15,ink,700);text('Where they listen',99,350,13,muted,500);
+  card(312,111,260,292,ink,16);text('THE CREATIVE IDEA',338,151,12,'#a9c7bc',700);
+  card(340,177,204,130,'#fff',13);cx.fillStyle='#f8dbc5';cx.beginPath();cx.arc(490,221,29,0,Math.PI*2);cx.fill();
+  cx.fillStyle=accent;cx.beginPath();cx.moveTo(356,282);cx.lineTo(408,220);cx.lineTo(447,258);cx.lineTo(484,236);cx.lineTo(528,282);cx.closePath();cx.fill();
+  text('Right message. Right moment.',339,346,13,'#fff',700);text('Built around a clear goal',339,375,12,'#a9c7bc',500);
+ }else if(hue===2){
+  text('ONE BRAND. EVERY TOUCHPOINT.',64,74,14,muted,700);
+  cx.strokeStyle='#becbc5';cx.lineWidth=3;cx.beginPath();cx.moveTo(320,245);cx.lineTo(178,164);cx.moveTo(320,245);cx.lineTo(462,164);cx.moveTo(320,245);cx.lineTo(178,334);cx.moveTo(320,245);cx.lineTo(462,334);cx.stroke();
+  card(228,191,184,108,ink,16);text('YOUR BRAND',267,232,15,'#fff',700);text('Same feel everywhere',250,262,12,'#a9c7bc',500);
+  const channels=[{x:82,y:112,label:'SEARCH',color:'#e7eefb',mark:'G'},{x:390,y:112,label:'SOCIAL',color:'#fff0e4',mark:'@'},{x:82,y:294,label:'WEBSITE',color:'#e5f3ec',mark:'W'},{x:390,y:294,label:'PRINT',color:'#f4eaf6',mark:'P'}];
+  channels.forEach(channel=>{card(channel.x,channel.y,148,92,channel.color,14);text(channel.mark,channel.x+18,channel.y+40,22,accent,700);text(channel.label,channel.x+18,channel.y+68,11,ink,700)});
+  cx.fillStyle=warm;cx.beginPath();cx.arc(320,245,6,0,Math.PI*2);cx.fill();
+ }else{
+  text('GROWTH YOU CAN TRACK',64,74,14,muted,700);
+  const metrics=[{x:64,label:'REACH',value:'48.2k',color:'#e5f3ec'},{x:247,label:'LEADS',value:'326',color:'#fff0e4'},{x:430,label:'GROWTH',value:'+24%',color:'#e9eef8'}];
+  metrics.forEach(metric=>{card(metric.x,106,154,86,metric.color,13);text(metric.label,metric.x+16,133,10,muted,700);text(metric.value,metric.x+16,170,23,ink,700)});
+  card(64,212,512,210,'#f7f9f8',15);text('From attention to outcomes',86,245,14,ink,700);
+  cx.strokeStyle='#e0e8e3';cx.lineWidth=1;[286,326,366].forEach(y=>{cx.beginPath();cx.moveTo(88,y);cx.lineTo(552,y);cx.stroke()});
+  cx.strokeStyle=accent;cx.lineWidth=5;cx.lineJoin='round';cx.lineCap='round';cx.beginPath();cx.moveTo(96,376);cx.lineTo(164,352);cx.lineTo(228,360);cx.lineTo(292,321);cx.lineTo(360,331);cx.lineTo(427,284);cx.lineTo(486,296);cx.lineTo(542,263);cx.stroke();
+  cx.fillStyle=warm;cx.beginPath();cx.arc(542,263,7,0,Math.PI*2);cx.fill();text('MEASURE',88,402,10,muted,700);text('OPTIMIZE',485,402,10,muted,700);
+ }
+}
+show(0);draw();
 
 /* tools */
-const tools=['Notion','Linear','Slack','Looker','Airtable','Jira','Asana'];
-$('#tools').innerHTML=tools.map((t,i)=>`<div class="tool card"><svg viewBox="0 0 24 24" fill="${colors[i]}"><rect x="3" y="3" width="18" height="18" rx="${i%2?9:5}" opacity=".9"/></svg>${t}</div>`).join('');
+const tools=[
+ ['Google Ads','Search, display & performance campaigns','G'],
+ ['Meta','Facebook & Instagram advertising','M'],
+ ['Google Analytics','Website & campaign performance','GA'],
+ ['Google Search Console','Search visibility & SEO insights','GSC'],
+ ['Semrush','SEO, keywords & competitor research','S'],
+ ['Figma','Brand, UI & creative design','F'],
+ ['WordPress','Websites & digital experiences','W']
+];
+$('#tools').innerHTML=tools.map(([name,description,mark],index)=>`<article class="tool card"><span class="tool-mark" style="--tool-color:${colors[index]}">${mark}</span><span class="tool-copy"><b>${name}</b><small>${description}</small></span></article>`).join('');
 
 /* posts */
 const posts=[
@@ -614,13 +726,81 @@ const showcaseFeatures=[
  {title:'Plans that turn into weekly work.',description:'We break each bet into quarterly milestones and weekly check-ins that fit the tools your teams already use, so progress is visible without adding meetings.',image:featureImage(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 500"><rect width="640" height="500" fill="#edf2e9"/><circle cx="95" cy="410" r="120" fill="#dbe8d7"/><rect x="42" y="38" width="556" height="424" rx="24" fill="#fff"/><text x="76" y="91" fill="#15314a" font-family="Arial,sans-serif" font-size="22" font-weight="700">Quarterly delivery</text><text x="76" y="119" fill="#71869a" font-family="Arial,sans-serif" font-size="13">Milestones across every team</text><rect x="76" y="150" width="145" height="260" rx="14" fill="#f3f6f8"/><rect x="247" y="150" width="145" height="260" rx="14" fill="#f3f6f8"/><rect x="418" y="150" width="145" height="260" rx="14" fill="#f3f6f8"/><text x="94" y="181" fill="#71869a" font-family="Arial,sans-serif" font-size="13" font-weight="700">UP NEXT</text><text x="265" y="181" fill="#71869a" font-family="Arial,sans-serif" font-size="13" font-weight="700">IN PROGRESS</text><text x="436" y="181" fill="#71869a" font-family="Arial,sans-serif" font-size="13" font-weight="700">COMPLETE</text><rect x="90" y="199" width="117" height="57" rx="9" fill="#fff" stroke="#dde5ec"/><rect x="90" y="269" width="117" height="57" rx="9" fill="#fff" stroke="#dde5ec"/><rect x="90" y="339" width="117" height="48" rx="9" fill="#fff" stroke="#dde5ec"/><rect x="261" y="199" width="117" height="72" rx="9" fill="#d9edfa" stroke="#a8d5f1"/><rect x="261" y="284" width="117" height="57" rx="9" fill="#fff" stroke="#dde5ec"/><rect x="432" y="199" width="117" height="48" rx="9" fill="#fff" stroke="#dde5ec"/><rect x="432" y="260" width="117" height="57" rx="9" fill="#fff" stroke="#dde5ec"/><rect x="432" y="330" width="117" height="57" rx="9" fill="#fff" stroke="#dde5ec"/><path d="M103 219h68M103 231h46M103 289h72M103 301h53M274 220h63M274 234h79M274 247h50M445 218h69M445 279h57M445 349h74" stroke="#9cb0bf" stroke-width="5" stroke-linecap="round"/></svg>`),alt:'A quarterly delivery board with upcoming, active, and completed milestones.',points:[{title:'Milestones every team owns',text:'Each squad sees its part of the plan and when it is due.'},{title:'Blockers flagged in days',text:'A short weekly check-in catches slippage while it is cheap to fix.'}]},
  {title:'Results you can point to at the board meeting.',description:'We agree on success measures before work starts, then report against them monthly. When a bet is not paying off, you hear it from us first.',image:featureImage(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 500"><rect width="640" height="500" fill="#f5ece5"/><circle cx="530" cy="400" r="150" fill="#f0d9c9"/><rect x="42" y="38" width="556" height="424" rx="24" fill="#fff"/><text x="76" y="91" fill="#15314a" font-family="Arial,sans-serif" font-size="22" font-weight="700">Monthly impact</text><text x="76" y="119" fill="#71869a" font-family="Arial,sans-serif" font-size="13">Baseline compared with today</text><rect x="76" y="150" width="300" height="245" rx="14" fill="#f8fafb"/><path d="M100 354h250M100 309h250M100 264h250M100 219h250" stroke="#e4ebef" stroke-width="2"/><path d="M104 329l53-21 49 9 47-59 45-28 49-48" fill="none" stroke="#4aa8f0" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="347" cy="182" r="7" fill="#4aa8f0"/><rect x="398" y="150" width="166" height="112" rx="14" fill="#e4f3ec"/><text x="418" y="184" fill="#71869a" font-family="Arial,sans-serif" font-size="12">CHURNED ACCOUNTS</text><text x="418" y="231" fill="#15314a" font-family="Arial,sans-serif" font-size="34" font-weight="700">-31%</text><rect x="398" y="282" width="166" height="113" rx="14" fill="#4aa8f0"/><text x="418" y="316" fill="#fff" font-family="Arial,sans-serif" font-size="12">EXPANSION REVENUE</text><text x="418" y="363" fill="#fff" font-family="Arial,sans-serif" font-size="30" font-weight="700">£860k</text><text x="100" y="424" fill="#71869a" font-family="Arial,sans-serif" font-size="12">WEEK 1</text><text x="306" y="424" fill="#71869a" font-family="Arial,sans-serif" font-size="12">WEEK 12</text></svg>`),alt:'An impact dashboard with an improving trend line, lower churn, and expansion revenue.',points:[{title:'Baselines set on day one',text:'We record each starting metric so gains are measured, not remembered.'},{title:'Monthly one-page reports',text:'Each report says what moved, what did not, and what we would change.'}]}
 ];
+const digitalGrowthFeatures=[
+ {kicker:'THE DIGITAL GROWTH DIFFERENCE',title:'A clear strategy built around your business.',description:'We start by understanding your business, audience, competitors, and goals. Then we identify where your brand can make the biggest impact across digital channels.',caption:'Strategy that gives your marketing a clear direction.',alt:'Brand positioning board connecting an audience profile, brand message, and marketing channels.',image:featureImage(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 500"><rect width="640" height="500" fill="#edf3ef"/><circle cx="555" cy="78" r="96" fill="#dcebe3"/><rect x="38" y="34" width="564" height="432" rx="24" fill="#fff" stroke="#dce5e0"/><text x="72" y="78" fill="#6c7d77" font-family="Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1.4">BRAND POSITIONING</text><rect x="72" y="101" width="304" height="207" rx="16" fill="#17352f"/><text x="96" y="138" fill="#a9c7bc" font-family="Arial,sans-serif" font-size="12" font-weight="700">CORE MESSAGE</text><text x="96" y="183" fill="#fff" font-family="Arial,sans-serif" font-size="25" font-weight="700">Make your brand</text><text x="96" y="216" fill="#fff" font-family="Arial,sans-serif" font-size="25" font-weight="700">matter to the</text><text x="96" y="249" fill="#f0a36b" font-family="Arial,sans-serif" font-size="25" font-weight="700">right people.</text><rect x="96" y="269" width="44" height="7" rx="3.5" fill="#67c4a1"/><rect x="148" y="269" width="44" height="7" rx="3.5" fill="#f0a36b"/><rect x="200" y="269" width="44" height="7" rx="3.5" fill="#7eaee0"/><rect x="397" y="101" width="171" height="207" rx="16" fill="#f3f6f4"/><text x="416" y="132" fill="#6c7d77" font-family="Arial,sans-serif" font-size="11" font-weight="700">WHO WE REACH</text><circle cx="482" cy="190" r="31" fill="#d7ece3"/><circle cx="482" cy="179" r="10" fill="#147b67"/><path d="M460 209c3-17 41-17 44 0" fill="#147b67"/><text x="416" y="249" fill="#17352f" font-family="Arial,sans-serif" font-size="13" font-weight="700">Growth-minded teams</text><text x="416" y="271" fill="#6c7d77" font-family="Arial,sans-serif" font-size="11">Need a trusted partner</text><text x="72" y="347" fill="#17352f" font-family="Arial,sans-serif" font-size="13" font-weight="700">CHANNEL STRATEGY</text><rect x="72" y="365" width="148" height="56" rx="11" fill="#e5f3ec"/><text x="91" y="399" fill="#147b67" font-family="Arial,sans-serif" font-size="13" font-weight="700">Search &amp; ads</text><rect x="235" y="365" width="148" height="56" rx="11" fill="#fff0e4"/><text x="254" y="399" fill="#9c5c31" font-family="Arial,sans-serif" font-size="13" font-weight="700">Social &amp; content</text><rect x="398" y="365" width="170" height="56" rx="11" fill="#e9eef8"/><text x="417" y="399" fill="#405d92" font-family="Arial,sans-serif" font-size="13" font-weight="700">Creators &amp; local</text></svg>`),points:[{title:'A strategy built for your audience',text:'We define who to reach, what to say, and where to reach them.'},{title:'The right channels, not every channel',text:'From Google and Meta to social media, SEO, content, and influencers, we focus on what makes sense for your business.'}]},
+ {kicker:'FROM IDEAS TO EXECUTION',title:'Campaigns that keep your brand moving.',description:'Great marketing needs consistent execution. We create campaigns, content, creatives, websites, and experiences that keep your brand visible and relevant.',caption:'Creative campaigns built for consistent growth.',alt:'Campaign workspace showing social creative, a live campaign, and improving engagement.',image:featureImage(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 500"><rect width="640" height="500" fill="#f5eee8"/><circle cx="77" cy="412" r="112" fill="#f2dfd0"/><rect x="38" y="34" width="564" height="432" rx="24" fill="#fff" stroke="#dce5e0"/><text x="72" y="78" fill="#6c7d77" font-family="Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1.4">CAMPAIGN WORKSPACE</text><rect x="73" y="104" width="237" height="320" rx="20" fill="#17352f"/><rect x="85" y="116" width="213" height="296" rx="13" fill="#f3f6f4"/><rect x="85" y="116" width="213" height="32" rx="13" fill="#fff"/><circle cx="103" cy="132" r="5" fill="#e66c57"/><circle cx="120" cy="132" r="5" fill="#f0bd66"/><circle cx="137" cy="132" r="5" fill="#67c4a1"/><rect x="101" y="164" width="181" height="137" rx="12" fill="#d8eee4"/><circle cx="234" cy="204" r="38" fill="#f0a36b"/><path d="M117 267c22-39 54-49 84-19 23 22 42 17 69-18v71H101v-25z" fill="#147b67"/><text x="104" y="326" fill="#17352f" font-family="Arial,sans-serif" font-size="12" font-weight="700">A little more room to grow.</text><text x="104" y="350" fill="#6c7d77" font-family="Arial,sans-serif" font-size="10">CREATIVE PREVIEW · SOCIAL</text><rect x="104" y="367" width="82" height="25" rx="12" fill="#147b67"/><text x="121" y="384" fill="#fff" font-family="Arial,sans-serif" font-size="10" font-weight="700">View campaign</text><rect x="340" y="104" width="228" height="135" rx="15" fill="#f3f6f4"/><text x="361" y="135" fill="#6c7d77" font-family="Arial,sans-serif" font-size="11" font-weight="700">CAMPAIGN STATUS</text><circle cx="374" cy="177" r="7" fill="#39a77c"/><text x="391" y="182" fill="#17352f" font-family="Arial,sans-serif" font-size="15" font-weight="700">Live across channels</text><rect x="340" y="256" width="228" height="168" rx="15" fill="#fff0e4"/><text x="361" y="289" fill="#9c5c31" font-family="Arial,sans-serif" font-size="11" font-weight="700">AUDIENCE RESPONSE</text><text x="361" y="336" fill="#17352f" font-family="Arial,sans-serif" font-size="32" font-weight="700">+38%</text><text x="361" y="358" fill="#6c7d77" font-family="Arial,sans-serif" font-size="12">engagement this month</text><path d="M361 397l31-13 28 7 33-25 29 8 34-25" fill="none" stroke="#147b67" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`),points:[{title:'Creative that gets attention',text:'Social posts, ads, videos, branding, and designs built to connect with your audience.'},{title:'Campaigns that keep improving',text:'We launch, test, learn, and optimize campaigns based on real audience response.'}]},
+ {kicker:'MARKETING YOU CAN MEASURE',title:'Results you can see. Growth you can track.',description:'Every campaign should have a purpose. We track the numbers that matter—from reach and engagement to leads, conversions, and customer growth.',caption:'Data-driven marketing focused on measurable growth.',alt:'Marketing performance dashboard with reach, leads, conversion metrics, and a growth chart.',image:featureImage(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 500"><rect width="640" height="500" fill="#edf3ef"/><circle cx="550" cy="418" r="114" fill="#dcebe3"/><rect x="38" y="34" width="564" height="432" rx="24" fill="#fff" stroke="#dce5e0"/><text x="72" y="78" fill="#6c7d77" font-family="Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1.4">MARKETING PERFORMANCE</text><rect x="72" y="101" width="148" height="94" rx="13" fill="#e6f4ec"/><text x="91" y="128" fill="#6c7d77" font-family="Arial,sans-serif" font-size="10" font-weight="700">REACH</text><text x="91" y="164" fill="#17352f" font-family="Arial,sans-serif" font-size="26" font-weight="700">48.2k</text><text x="174" y="164" fill="#147b67" font-family="Arial,sans-serif" font-size="11" font-weight="700">+24%</text><rect x="236" y="101" width="148" height="94" rx="13" fill="#fff0e4"/><text x="255" y="128" fill="#6c7d77" font-family="Arial,sans-serif" font-size="10" font-weight="700">LEADS</text><text x="255" y="164" fill="#17352f" font-family="Arial,sans-serif" font-size="26" font-weight="700">326</text><text x="330" y="164" fill="#147b67" font-family="Arial,sans-serif" font-size="11" font-weight="700">+18%</text><rect x="400" y="101" width="168" height="94" rx="13" fill="#e9eef8"/><text x="419" y="128" fill="#6c7d77" font-family="Arial,sans-serif" font-size="10" font-weight="700">CONVERSION</text><text x="419" y="164" fill="#17352f" font-family="Arial,sans-serif" font-size="26" font-weight="700">4.8%</text><text x="493" y="164" fill="#147b67" font-family="Arial,sans-serif" font-size="11" font-weight="700">+0.9</text><rect x="72" y="214" width="496" height="210" rx="14" fill="#f7f9f8"/><text x="94" y="245" fill="#17352f" font-family="Arial,sans-serif" font-size="13" font-weight="700">Growth over time</text><text x="94" y="267" fill="#6c7d77" font-family="Arial,sans-serif" font-size="10">Audience to customer journey</text><path d="M100 380h438M100 343h438M100 306h438" stroke="#e0e8e3" stroke-width="1.5"/><path d="M111 370l61-22 58 8 60-44 58 9 59-57 57 10 59-46" fill="none" stroke="#147b67" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="523" cy="228" r="6" fill="#f0a36b"/><text x="100" y="405" fill="#6c7d77" font-family="Arial,sans-serif" font-size="10">AWARENESS</text><text x="453" y="405" fill="#6c7d77" font-family="Arial,sans-serif" font-size="10">CUSTOMERS</text></svg>`),points:[{title:'Clear performance insights',text:'Know what is working, where your budget is going, and what needs to improve.'},{title:'Better results over time',text:'We continuously optimize your campaigns and digital presence to turn more attention into meaningful business outcomes.'}]}
+];
+const resultsIllustration=digitalGrowthFeatures[2].image;
+Object.assign(digitalGrowthFeatures[0],{
+ kicker:'01 — STRATEGY BEFORE SPENDING',
+ title:'Strategy before spending',
+ description:'We start by understanding your business, audience, competitors, and goals before putting your marketing budget to work. Every campaign begins with a clear reason and a defined direction.',
+ caption:'Strategy that puts every marketing dollar to work.',
+ points:[
+  {title:'A strategy built around your business',text:'We identify the right audience, channels, messaging, and opportunities for your brand.'},
+  {title:'Smarter marketing decisions',text:'We focus your time and budget on the platforms and activities that can create the most impact.'}
+ ],
+ cta:'Build your strategy'
+});
+Object.assign(digitalGrowthFeatures[1],{
+ kicker:'02 — CREATIVE BUILT TO STAND OUT',
+ title:'Creative built to stand out',
+ description:'People see thousands of messages every day. We create branding, content, websites, social media, and advertising that gives your audience a reason to stop, look, and remember your business.',
+ caption:'Creative that gives people a reason to remember.',
+ points:[
+  {title:'Creative that reflects your brand',text:'From logos and visual identity to social posts and advertising campaigns, everything works together.'},
+  {title:'Content made for every channel',text:'We create digital and print assets designed for the platforms where your customers spend their time.'}
+ ],
+ cta:'Explore our creative'
+});
+digitalGrowthFeatures[2]={
+ kicker:'03 — CAMPAIGNS BUILT TO PERFORM',
+ title:'Campaigns built to perform',
+ description:"We don't launch campaigns and simply wait for the results. We continuously test, measure, and optimize your campaigns across Google, Meta, social media, SEO, and other digital channels.",
+ caption:'Campaigns that learn, adapt, and perform.',
+ alt:'Campaign optimization board comparing search, social, and content performance with active tests.',
+ image:featureImage(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 500"><rect width="640" height="500" fill="#f0f1fa"/><circle cx="80" cy="420" r="130" fill="#e1e3f4"/><rect x="38" y="34" width="564" height="432" rx="24" fill="#fff" stroke="#dce5e0"/><text x="72" y="78" fill="#6c7d77" font-family="Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1.4">CAMPAIGN OPTIMIZATION</text><rect x="72" y="101" width="496" height="78" rx="14" fill="#f4f5fa"/><text x="96" y="132" fill="#6c7d77" font-family="Arial,sans-serif" font-size="11" font-weight="700">OBJECTIVE</text><text x="96" y="157" fill="#17352f" font-family="Arial,sans-serif" font-size="17" font-weight="700">More qualified leads at a lower cost</text><rect x="72" y="198" width="148" height="114" rx="14" fill="#e6f4ec"/><text x="91" y="227" fill="#6c7d77" font-family="Arial,sans-serif" font-size="10" font-weight="700">SEARCH</text><text x="91" y="264" fill="#17352f" font-family="Arial,sans-serif" font-size="24" font-weight="700">+26%</text><text x="91" y="288" fill="#147b67" font-family="Arial,sans-serif" font-size="11">lead quality</text><rect x="246" y="198" width="148" height="114" rx="14" fill="#fff0e4"/><text x="265" y="227" fill="#6c7d77" font-family="Arial,sans-serif" font-size="10" font-weight="700">SOCIAL</text><text x="265" y="264" fill="#17352f" font-family="Arial,sans-serif" font-size="24" font-weight="700">-18%</text><text x="265" y="288" fill="#147b67" font-family="Arial,sans-serif" font-size="11">cost per lead</text><rect x="420" y="198" width="148" height="114" rx="14" fill="#e9eef8"/><text x="439" y="227" fill="#6c7d77" font-family="Arial,sans-serif" font-size="10" font-weight="700">CONTENT</text><text x="439" y="264" fill="#17352f" font-family="Arial,sans-serif" font-size="24" font-weight="700">3.4x</text><text x="439" y="288" fill="#147b67" font-family="Arial,sans-serif" font-size="11">return on spend</text><rect x="72" y="332" width="496" height="92" rx="14" fill="#17352f"/><text x="96" y="363" fill="#a9c7bc" font-family="Arial,sans-serif" font-size="11" font-weight="700">OPTIMIZATION LOOP</text><text x="96" y="397" fill="#fff" font-family="Arial,sans-serif" font-size="15" font-weight="700">Test</text><path d="M143 392h60m-8-8 8 8-8 8" fill="none" stroke="#f0a36b" stroke-width="2"/><text x="218" y="397" fill="#fff" font-family="Arial,sans-serif" font-size="15" font-weight="700">Learn</text><path d="M278 392h60m-8-8 8 8-8 8" fill="none" stroke="#f0a36b" stroke-width="2"/><text x="353" y="397" fill="#fff" font-family="Arial,sans-serif" font-size="15" font-weight="700">Improve</text></svg>`),
+ points:[
+  {title:'Performance-focused campaigns',text:'Every campaign has a clear objective, whether it is awareness, leads, sales, traffic, or engagement.'},
+  {title:'Continuous optimization',text:'We use real campaign data to improve targeting, creative, messaging, and budget allocation.'}
+ ],
+ cta:'Launch a campaign'
+};
+digitalGrowthFeatures.push({
+ kicker:'04 — RESULTS YOU CAN MEASURE',
+ title:'Marketing you can measure',
+ description:'Views and likes are only part of the picture. We focus on the numbers that connect marketing activity to your business—leads, conversions, customer acquisition, engagement, and revenue.',
+ caption:'Data-driven marketing focused on measurable growth.',
+ alt:'Marketing performance dashboard tracking reach, leads, conversions, and growth over time.',
+ image:resultsIllustration,
+ points:[
+  {title:'Clear and transparent reporting',text:'Understand where your budget is going and how your campaigns are performing.'},
+  {title:'Insights that drive the next move',text:'We turn campaign data into practical recommendations so every campaign gets smarter over time.'}
+ ],
+ cta:'See our approach'
+});
+showcaseFeatures.splice(0,showcaseFeatures.length,...digitalGrowthFeatures);
 const showcaseImages=$('#showcase-art');
 const showcaseCaption=$('#showcase-caption');
+const showcaseKicker=$('#showcase-kicker');
 const showcaseCount=$('#showcase-count');
 const showcaseList=$('#showcase-features');
 showcaseImages.innerHTML=showcaseFeatures.map((feature,index)=>`<img class="showcase-layer${index===0?' is-active':''}" src="${feature.image}" alt="${feature.alt}" aria-hidden="${index!==0}">`).join('');
 showcaseList.innerHTML=showcaseFeatures.map((feature,index)=>`<article class="showcase-feature${index===0?' is-active':''}" data-showcase-index="${index}"><img class="feature-mobile-image" src="${feature.image}" alt="${feature.alt}"><h3>${feature.title}</h3><p>${feature.description}</p><div class="showcase-points">${feature.points.map(point=>`<div class="showcase-point"><svg class="showcase-check" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="9" stroke="currentColor" stroke-width="1.7"/><path d="m7 11 2.6 2.6L15.5 8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><h4>${point.title}</h4><p>${point.text}</p></div>`).join('')}</div></article>`).join('');
 const showcaseSlides=[...showcaseList.children];
+showcaseSlides.forEach((slide,index)=>{
+  const points=slide.querySelector('.showcase-points');
+  const pointsLabel=document.createElement('p');
+  pointsLabel.className='showcase-points-label';
+  pointsLabel.textContent='What you get';
+  points.before(pointsLabel);
+  const button=document.createElement('a');
+  button.className='btn btn-blue showcase-cta';
+  button.href='#contact';
+  button.textContent=showcaseFeatures[index].cta;
+  slide.append(button);
+});
 const showcaseDesktop=window.matchMedia('(min-width: 1024px)');
 let showcaseObserver;
 function setActiveShowcase(index){
@@ -629,7 +809,8 @@ function setActiveShowcase(index){
     image.setAttribute('aria-hidden',String(imageIndex!==index));
   });
   showcaseSlides.forEach((slide,slideIndex)=>slide.classList.toggle('is-active',slideIndex===index));
-  showcaseCaption.textContent=showcaseFeatures[index].title;
+  showcaseKicker.textContent=showcaseFeatures[index].kicker;
+  showcaseCaption.textContent=showcaseFeatures[index].caption;
   showcaseCount.textContent=`${String(index+1).padStart(2,'0')} / ${String(showcaseFeatures.length).padStart(2,'0')}`;
 }
 function observeShowcaseSlides(){
